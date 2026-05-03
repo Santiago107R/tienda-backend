@@ -2,13 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { GetUser } from 'src/auth/decorators/get-user.decorator';
-import { User } from 'src/auth/entities/user.entity';
-import { Auth } from 'src/auth/decorators/auth.decorator';
-import { ValidRoles } from 'src/auth/interfaces';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { User } from '../auth/entities/user.entity';
+import { ValidRoles } from '../auth/interfaces';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
+import { Auth, GetUser } from '../auth/decorators';
 
 @ApiTags('Products')
 @Controller('product')

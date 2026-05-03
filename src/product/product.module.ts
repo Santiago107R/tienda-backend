@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { CategoryModule } from 'src/category/category.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { CategoryModule } from '../category/category.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [ProductController],
@@ -12,11 +12,11 @@ import { AuthModule } from 'src/auth/auth.module';
   imports: [
     TypeOrmModule.forFeature([Product]),
     CategoryModule,
-    AuthModule,
+    forwardRef(() => AuthModule),
   ],
   exports: [
     TypeOrmModule,
     ProductService,
   ]
 })
-export class ProductModule {}
+export class ProductModule { }

@@ -6,7 +6,7 @@ import { Product } from './entities/product.entity';
 import { ArrayContains, Between, ILike, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { isUUID } from 'class-validator';
-import type { User } from 'src/auth/entities/user.entity';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class ProductService {
