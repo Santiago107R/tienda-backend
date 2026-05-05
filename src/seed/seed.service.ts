@@ -67,17 +67,24 @@ export class SeedService {
     const products = initialData.products;
     const hostApi = this.configService.get('HOST_API');
 
-    await Promise.all(
-      products.map((product) => this.productService.create(
-        {
-          ...product,
-          image: `${hostApi}files/product/${product.image}`,
-        }, 
-        user
-      ))
-    )
+    const categories = await this.categoryService.findAll();
 
-    return true
+    await Promise.all(
+      products.map((product) => {
+        const category = categories.find(cat => cat.id === product.category);
+
+        return this.productService.create(
+          {
+            ...product,
+            image: `${hostApi}/files/product/${product.image}`,
+            category: category?.id ?? product.category,
+          },
+          user
+        );
+      })
+    );
+
+    return true;
   }
 
 }
