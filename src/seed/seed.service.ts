@@ -56,11 +56,11 @@ export class SeedService {
   private async insertNewCategories() {
     const categories = initialData.categories;
 
-    const dbCategories = await Promise.all(
+    await Promise.all(
       categories.map((category) => this.categoryService.create(category))
     );
 
-    return dbCategories;
+    return true;
   }
 
   private async insertNewProducts(user: User) {
@@ -73,11 +73,13 @@ export class SeedService {
       products.map((product) => {
         const category = categories.find(cat => cat.id === product.category);
 
+        if (!category) return
+
         return this.productService.create(
           {
             ...product,
             image: `${hostApi}/files/product/${product.image}`,
-            category: category?.id ?? product.category,
+            category: category?.id,
           },
           user
         );
