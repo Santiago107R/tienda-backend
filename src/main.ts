@@ -19,7 +19,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Tienda RESTFul API')
-    .setDescription('Tienda shop endpoints')
+    .setDescription('Tienda endpoints')
     .setVersion('1.0')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);

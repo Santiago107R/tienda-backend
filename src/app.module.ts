@@ -23,7 +23,7 @@ import { SeedModule } from './seed/seed.module';
         username: configService.get('PGUSER'),
         password: configService.get('PGPASSWORD'),
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
         ssl: true,
         extra: {
           ssl: {
