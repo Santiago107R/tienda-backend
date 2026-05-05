@@ -9,7 +9,7 @@ const stage = process.env.STAGE || 'dev';
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: stage === 'dev' ? 'localhost' : process.env.PGHOST,
-    port: process.env.PGPORT ? +process.env.DB_PORT : 5432,
+    port: process.env.PGPORT ? +process.env.PGPORT : 5432,
     username: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
