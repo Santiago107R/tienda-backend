@@ -16,7 +16,6 @@ import { SeedModule } from './seed/seed.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        ssl: configService.get('STAGE') === 'prod',
         type: 'postgres',
         host: configService.get('PGHOST'),
         port: +(configService.get('PGPORT') ?? 5432),
@@ -25,6 +24,12 @@ import { SeedModule } from './seed/seed.module';
         password: configService.get('PGPASSWORD'),
         autoLoadEntities: true,
         synchronize: false,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
