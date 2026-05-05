@@ -20,7 +20,7 @@ import { SeedModule } from './seed/seed.module';
         host: configService.get('PGHOST'),
         port: +(configService.get('PGPORT') ?? 5432),
         database: configService.get('PGDATABASE'),
-        username: configService.get('PGDATABASE'),
+        username: configService.get('PGUSER'),
         password: configService.get('PGPASSWORD'),
         autoLoadEntities: true,
         synchronize: false,
