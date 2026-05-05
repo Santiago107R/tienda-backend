@@ -5,6 +5,7 @@ import { CategoryService } from '../category/category.service';
 import { ProductService } from '../product/product.service';
 import { Repository } from 'typeorm';
 import { initialData } from './data/seed-data';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class SeedService {
@@ -15,6 +16,8 @@ export class SeedService {
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    private readonly configService: ConfigService
   ) { }
 
   async runSeed() {
@@ -38,7 +41,7 @@ export class SeedService {
       .delete()
       .where({})
       .execute()
-    }
+  }
 
   private async insertUsers() {
     const seedUsers = initialData.users;
@@ -51,20 +54,27 @@ export class SeedService {
   }
 
   private async insertNewCategories() {
-    const categories = initialData.categories
+    const categories = initialData.categories;
 
-    await Promise.all(
+    const dbCategories = await Promise.all(
       categories.map((category) => this.categoryService.create(category))
-    )
+    );
 
-    return true
+    return dbCategories;
   }
 
   private async insertNewProducts(user: User) {
     const products = initialData.products;
+    const hostApi = this.configService.get('HOST_API');
 
     await Promise.all(
-      products.map((product) => this.productService.create(product, user))
+      products.map((product) => this.productService.create(
+        {
+          ...product,
+          image: `${hostApi}files/product/${product.image}`,
+        }, 
+        user
+      ))
     )
 
     return true
