@@ -71,7 +71,7 @@ export class SeedService {
 
     await Promise.all(
       products.map((product) => {
-        const category = categories.find(cat => cat.id === product.category);
+        const category = categories.find(cat => cat.name === product.category);
 
         if (!category) return
 

@@ -13,7 +13,7 @@ interface SeedProduct {
     gender?: Gender;
     sizes?: ValidSizes[];
     image: string;
-    category: number; 
+    category: string; 
 }
 
 interface SeedCategory {
@@ -66,7 +66,7 @@ export const initialData: SeedData = {
             price: 1200,
             stock: 15,
             image: "s24_ultra.png",
-            category: 1,
+            category: 'tecnologia',
         },
         {
             title: "Remera Oversize Black",
@@ -77,7 +77,7 @@ export const initialData: SeedData = {
             gender: 'men',
             sizes: ['S', 'M', 'L', 'XL'],
             image: "remera_black.png",
-            category: 2,
+            category: 'remera',
         },
         {
             title: "Pantalon Cargo Beige",
@@ -88,7 +88,7 @@ export const initialData: SeedData = {
             gender: 'men',
             sizes: ['M', 'L', 'XL'],
             image: "cargo_pants.png",
-            category: 3,
+            category: 'pantalon',
         },
         {
             title: "Gorra Snapback Classic",
@@ -98,7 +98,7 @@ export const initialData: SeedData = {
             stock: 100,
             gender: 'unisex',
             image: "snapback.png",
-            category: 4,
+            category: 'gorra',
         },
         {
             title: "Zapatillas Running Pro",
@@ -109,7 +109,7 @@ export const initialData: SeedData = {
             gender: 'women',
             sizes: ['S', 'M', 'L'], 
             image: "running_shoes.png",
-            category: 5,
+            category: 'zapatilla',
         },
     ]
 }
