@@ -49,6 +49,9 @@ export class ProductController {
 
   @Delete(':id')
   @Auth(ValidRoles.superUser, ValidRoles.admin)
+  @ApiResponse({ status: 200, description: 'OK' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 404, description: 'Not Found' })
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.productService.remove(id);
   }

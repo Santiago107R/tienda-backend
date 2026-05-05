@@ -65,7 +65,7 @@ export const initialData: SeedData = {
             description: "El último modelo de Samsung con IA integrada y pantalla de 120Hz.",
             price: 1200,
             stock: 15,
-            image: "s24_ultra.png",
+            image: "http://localhost:3000/api/files/product/s24_ultra.png",
             category: 1,
         },
         {
@@ -76,7 +76,7 @@ export const initialData: SeedData = {
             stock: 50,
             gender: 'men',
             sizes: ['S', 'M', 'L', 'XL'],
-            image: "remera_black.png",
+            image: "http://localhost:3000/api/files/product/remera_black.png",
             category: 2,
         },
         {
@@ -87,7 +87,7 @@ export const initialData: SeedData = {
             stock: 20,
             gender: 'men',
             sizes: ['M', 'L', 'XL'],
-            image: "cargo_pants.png",
+            image: "http://localhost:3000/api/files/product/cargo_pants.png",
             category: 3,
         },
         {
@@ -97,7 +97,7 @@ export const initialData: SeedData = {
             price: 15,
             stock: 100,
             gender: 'unisex',
-            image: "snapback.png",
+            image: "http://localhost:3000/api/files/product/snapback.png",
             category: 4,
         },
         {
@@ -108,7 +108,7 @@ export const initialData: SeedData = {
             stock: 30,
             gender: 'women',
             sizes: ['S', 'M', 'L'], 
-            image: "running_shoes.png",
+            image: "http://localhost:3000/api/files/product/running_shoes.png",
             category: 5,
         },
     ]

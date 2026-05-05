@@ -31,10 +31,6 @@ import { SeedModule } from './seed/seed.module';
       inject: [ConfigService],
     }),
 
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-    }),
-
     FilesModule,
 
     ProductModule,
