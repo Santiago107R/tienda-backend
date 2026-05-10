@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FilesModule } from './files/files.module';
-import { join } from 'path';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
 import { CommonModule } from './common/common.module';

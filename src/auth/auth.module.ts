@@ -3,15 +3,15 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { ProductModule } from 'src/product/product.module';
+import { ProductModule } from '../product/product.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStategy } from './strategy/jwt-strategy';
+import { JwtStrategy } from './strategy/jwt-strategy';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStategy],
+  providers: [AuthService, JwtStrategy],
   imports: [
     ConfigModule,
 
@@ -37,7 +37,7 @@ import { JwtStategy } from './strategy/jwt-strategy';
 
   ],
   exports: [
-    TypeOrmModule, JwtModule, PassportModule, JwtStategy
+    TypeOrmModule, JwtModule, PassportModule, JwtStrategy
   ],
 })
 export class AuthModule { }

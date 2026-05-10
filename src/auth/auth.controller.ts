@@ -22,7 +22,10 @@ export class AuthController {
       expires: new Date(Date.now() + 3600000)
     });
 
-    return user;
+    return {
+      ...user,
+      token,
+    };
   }
 
   @Post('login')
@@ -36,7 +39,10 @@ export class AuthController {
       expires: new Date(Date.now() + 3600000)
     });
 
-    return user;
+    return {
+      ...user,
+      token,
+    };
   }
 
   @Get('check-status')
@@ -54,7 +60,10 @@ export class AuthController {
       expires: new Date(Date.now() + 3600000),
     });
 
-    return userToReturn;
+    return {
+      ...userToReturn,
+      token,
+    };
   }
 
   @Post('logout')
