@@ -19,7 +19,7 @@ export class AuthController {
       httpOnly: true,
       secure: process.env.STAGE === 'prod',
       sameSite: 'lax',
-      expires: new Date(Date.now() + 3600000)
+      expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
     });
 
     return {
@@ -36,7 +36,7 @@ export class AuthController {
       httpOnly: true,
       secure: process.env.STAGE === 'prod',
       sameSite: 'lax',
-      expires: new Date(Date.now() + 3600000)
+      expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
     });
 
     return {
@@ -57,7 +57,7 @@ export class AuthController {
       httpOnly: true,
       secure: process.env.STAGE === 'prod',
       sameSite: 'lax',
-      expires: new Date(Date.now() + 3600000),
+      expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
     });
 
     return {
@@ -70,6 +70,6 @@ export class AuthController {
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('access_token');
     return { message: 'Sesión cerrada correctamente' };
-  } 
+  }
 
 }
