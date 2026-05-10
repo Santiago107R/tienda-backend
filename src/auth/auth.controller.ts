@@ -1,29 +1,66 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-user-auth.dto';
 import { LoginUserDto } from './dto/login-auth.dto';
 import { GetUser } from './decorators';
 import { User } from './entities/user.entity';
+import { type Response } from 'express';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   @Post('register')
-  createUser(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  async createUser(@Body() createAuthDto: CreateAuthDto, @Res({ passthrough: true }) res: Response) {
+    const { token, ...user } = await this.authService.create(createAuthDto)
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: process.env.STAGE === 'prod',
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 3600000)
+    });
+
+    return user;
   }
 
   @Post('login')
-  loginUser(@Body() loginUserDto: LoginUserDto) {
-    return this.authService.login(loginUserDto)
+  async loginUser(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) res: Response) {
+    const { token, ...user } = await this.authService.login(loginUserDto)
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: process.env.STAGE === 'prod',
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 3600000)
+    });
+
+    return user;
   }
 
   @Get('check-status')
-  checkAuthStatus(
-    @GetUser() user: User
+  @UseGuards(AuthGuard())
+  async checkAuthStatus(
+    @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response
   ) {
-    return this.authService.checkAuthStatus(user)
+    const { token, ...userToReturn } = await this.authService.checkAuthStatus(user);
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: process.env.STAGE === 'prod',
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 3600000),
+    });
+
+    return userToReturn;
   }
+
+  @Post('logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access_token');
+    return { message: 'Sesión cerrada correctamente' };
+  } 
 
 }
